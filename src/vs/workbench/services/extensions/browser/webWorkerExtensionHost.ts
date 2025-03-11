@@ -290,6 +290,15 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 		if (nlsBaseUrl && this._productService.commit && !platform.Language.isDefaultVariant()) {
 			nlsUrlWithDetails = URI.joinPath(URI.parse(nlsBaseUrl), this._productService.commit, this._productService.version, platform.Language.value());
 		}
+
+		let actionId = '';
+		mainWindow.location.search.split('?')[1].split('&').forEach((key) => {
+			const query = key.split('=');
+			if (query[0] === 'action') {
+				actionId = query[1];
+			}
+		});
+
 		return {
 			commit: this._productService.commit,
 			version: this._productService.version,
@@ -313,7 +322,8 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 				configuration: workspace.configuration || undefined,
 				id: workspace.id,
 				name: this._labelService.getWorkspaceLabel(workspace),
-				transient: workspace.transient
+				transient: workspace.transient,
+				actionId: actionId
 			},
 			consoleForward: {
 				includeStack: false,
