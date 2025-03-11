@@ -79,6 +79,7 @@ export interface IStaticWorkspaceData {
 	transient?: boolean;
 	configuration?: UriComponents | null;
 	isUntitled?: boolean | null;
+	actionId?: string;
 }
 
 export interface MessagePortLike {
