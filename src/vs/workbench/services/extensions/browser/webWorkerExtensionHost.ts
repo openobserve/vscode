@@ -294,7 +294,7 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 		let actionId = '';
 		mainWindow.location.search.split('?')[1].split('&').forEach((key) => {
 			const query = key.split('=');
-			if (query[0] === 'action') {
+			if (query[0] === 'id') {
 				actionId = query[1];
 			}
 		});
