@@ -523,8 +523,9 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 				: undefined;
 
 
-			console.log("set actionId in workspaceState", this._initData.workspace?.actionId);
+			console.log('set actionId in workspaceState', this._initData.workspace?.actionId);
 			workspaceState.update('actionId', this._initData.workspace?.actionId);
+			workspaceState.update('actionName', this._initData.workspace?.actionName);
 
 			return Object.freeze<vscode.ExtensionContext>({
 				globalState,

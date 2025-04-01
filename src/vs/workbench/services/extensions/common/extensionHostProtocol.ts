@@ -80,6 +80,7 @@ export interface IStaticWorkspaceData {
 	configuration?: UriComponents | null;
 	isUntitled?: boolean | null;
 	actionId?: string;
+	actionName?: string;
 }
 
 export interface MessagePortLike {
