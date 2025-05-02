@@ -293,21 +293,10 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 			nlsUrlWithDetails = URI.joinPath(URI.parse(nlsBaseUrl), this._productService.commit, this._productService.version, platform.Language.value());
 		}
 
-		console.log('Setting actionId');
-		let actionId = '';
-		let actionName = '';
-		mainWindow.location.search.split('?')[1].split('&').forEach((key) => {
-			const query = key.split('=');
-			if (query[0] === 'id') {
-				actionId = query[1];
-			}
+		const url = new URL(mainWindow.location.href);
+		const origin = decodeURIComponent(url.searchParams.get('origin') || '');
 
-			if (query[0] === 'name') {
-				actionName = query[1];
-			}
-		});
-
-		console.log('actionId', actionId, mainWindow);
+		console.log('origin ---', origin);
 
 		return {
 			commit: this._productService.commit,
@@ -333,8 +322,7 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 				id: workspace.id,
 				name: this._labelService.getWorkspaceLabel(workspace),
 				transient: workspace.transient,
-				actionId: actionId,
-				actionName: actionName
+				origin,
 			},
 			consoleForward: {
 				includeStack: false,
